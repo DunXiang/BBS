@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--扫描 Spring 注解-->
-    <context:component-scan base-package="com.it.bbs.service.imp"></context:component-scan>
+    <context:component-scan base-package="com.it.bbs.user.service.imp"></context:component-scan>
     <!---->
 
 </beans>

@@ -33,7 +33,7 @@
     <!--
         3. 实现 Realm 接口的 bean
     -->
-    <bean class="com.it.bbs.realm.UserRealm" id="userRealm">
+    <bean class="com.it.bbs.user.realm.UserRealm" id="userRealm">
 
     </bean>
     <!--

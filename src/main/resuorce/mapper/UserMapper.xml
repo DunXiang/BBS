@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace=“实现类的全路径”  parameterType="定义参数类型"  resultType="返回值类型"-->
-<mapper namespace="com.it.bbs.mapper.UserMapper">
-    <resultMap id="User" type="com.it.bbs.domain.User">
+<mapper namespace="com.it.bbs.user.mapper.UserMapper">
+    <resultMap id="User" type="com.it.bbs.user.domain.User">
         <association property="department" column="department"
-                     select="com.it.bbs.mapper.DepartmentMapper.findDepartment"></association>
+                     select="com.it.bbs.user.mapper.DepartmentMapper.findDepartment"></association>
     </resultMap>
 
-    <select id="findUser" resultType="com.it.bbs.domain.User">
+    <select id="findUser" resultType="com.it.bbs.user.domain.User">
         select * from user
         <where>
             <if test="id!=null and id!='' ">

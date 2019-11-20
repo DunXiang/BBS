@@ -32,7 +32,7 @@
     <!--接口扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
-        <property name="basePackage" value="com.it.bbs.mapper"/>
+        <property name="basePackage" value="com.it.bbs.user.mapper"/>
     </bean>
     
     <bean class="org.mybatis.spring.SqlSessionTemplate" id="sessionTemplate">
@@ -57,7 +57,7 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="txPointcut" expression="execution(* com.it.bbs.service.*.*(..))"/>
+        <aop:pointcut id="txPointcut" expression="execution(* com.it.bbs.user.service.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
 </beans>

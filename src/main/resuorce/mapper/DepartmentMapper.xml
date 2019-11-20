@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace=“实现类的全路径”  parameterType="定义参数类型"  resultType="返回值类型"-->
-<mapper namespace="com.it.bbs.mapper.DepartmentMapper">
-    <select id="findDepartment" resultType="com.it.bbs.domain.Department">
+<mapper namespace="com.it.bbs.user.mapper.DepartmentMapper">
+    <select id="findDepartment" resultType="com.it.bbs.user.domain.Department">
         select * from department where id=#{id}
     </select>
-    <select id="showAll" resultType="com.it.bbs.domain.Department">
+    <select id="showAll" resultType="com.it.bbs.user.domain.Department">
         select * from department
     </select>
 </mapper>
