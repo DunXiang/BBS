@@ -14,7 +14,13 @@ public class User {
     // 用户密码
     private String password;
     // 账户状态
-    private int state;
+    private int status;
+
+    public class Status{
+        public static final int NORMAL = 1;
+        public static final int LOCK = 0;
+        public static final int SEAL = -1;
+    }
     // 用户部门
     private int department;
     //部门
@@ -31,7 +37,7 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.state = start;
+        this.status = start;
         this.department = department;
         this.date = date;
         this.email = email;
@@ -64,12 +70,12 @@ public class User {
         this.password = password;
     }
 
-    public int getState() {
-        return state;
+    public int getStatus() {
+        return status;
     }
 
-    public void setState(int start) {
-        this.state = start;
+    public void setStatus(int start) {
+        this.status = start;
     }
 
     public int getDepartment() {
@@ -110,7 +116,7 @@ public class User {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", start=" + state +
+                ", start=" + status +
                 ", department=" + department +
                 ", departmentBean=" + departmentBean +
                 ", date=" + date +

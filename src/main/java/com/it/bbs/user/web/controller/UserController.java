@@ -5,6 +5,8 @@ import com.it.bbs.user.domain.User;
 import com.it.bbs.user.exception.UserException;
 import com.it.bbs.user.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,23 +23,16 @@ public class UserController {
     public String loginGet(){
         return "/login";
     }
+
     /**
      * 登录路径
      * @return 成功返回到主页
      * @return 失败返回到失败页面
      * */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ModelAndView login(User user){
-        ModelAndView view = null;
-        try {
-            User login = userService.login(user);
-            view = new ModelAndView("redirect:/");
-        } catch (UserException e) {
-            System.out.println(e.getMessage());
-            view = new ModelAndView("forward:/");
-            view.addObject("exception",e.getMessage());
-        }
-        return view;
+    public ModelAndView login(User user, ModelMap model){
+        System.out.println(model);
+        return null;
     }
 
 
@@ -59,7 +54,7 @@ public class UserController {
     }
 
     /**
-     *
+     *  注册一个用户
      * */
     @RequestMapping(value = "/user",method = RequestMethod.POST)
     public String register(User user){

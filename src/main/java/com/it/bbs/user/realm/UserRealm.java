@@ -32,7 +32,12 @@ public class UserRealm extends AuthorizingRealm {
         // 查找用户
         try {
             User user = userService.login(new User(null,name,token.getCredentials().toString(),0,0,null,null));
-            System.out.println(user);
+            // 如果用户没有验证和异常
+            if (user.getStatus() == User.Status.LOCK){
+                throw new LockedAccountException();
+            }else if (user.getStatus() == User.Status.SEAL){
+                throw new DisabledAccountException();
+            }
             return new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
         } catch (UserException e) {
             throw new UnknownAccountException();
