@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=“实现类的全路径”  parameterType="定义参数类型"  resultType="返回值类型"-->
+<mapper namespace="com.it.bbs.mapper.UserMapper">
+    <resultMap id="User" type="com.it.bbs.domain.User">
+        <association property="department" column="department"
+                     select="com.it.bbs.mapper.DepartmentMapper.findDepartment"></association>
+    </resultMap>
+
+    <select id="findUser" resultType="com.it.bbs.domain.User">
+        select * from user
+        <where>
+            <if test="id!=null and id!='' ">
+                and id=#{id}
+            </if>
+            <if test="username!=null and username!='' ">
+                and username=#{username}
+            </if>
+            <if test="email!=null and email!='' ">
+                and email=#{email}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertUser">
+        insert into user values(#{id},#{username},#{password},#{state},#{department},#{email})
+    </insert>
+</mapper>

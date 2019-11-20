@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--shiro配置-->
+
+    <!--
+    Shiro 核心配置：
+        1. 配置Security Manager
+    -->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+        <!--缓存管理器-->
+        <!--        <property name="cacheManager" ref="ehCacheManager"/>-->
+        <property name="realm" ref="userRealm"/>
+    </bean>
+    <!--
+        2. 配置缓存管理器
+    -->
+    <!--<bean class="org.apache.shiro.cache.ehcache.EhCacheManager" id="ehCacheManager">
+        &lt;!&ndash;缓存配置文件的路径&ndash;&gt;
+        <property name="cacheManagerConfigFile" value="classpath:"/>
+    </bean>-->
+    <!--
+        3. 实现 Realm 接口的 bean
+    -->
+    <bean class="com.it.bbs.realm.UserRealm" id="userRealm">
+
+    </bean>
+    <!--
+        4. 可以自动的配置 Spring IOC 容器中 ShrioBean 生命周期方法
+    -->
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor" id="lifecycleBeanPostProcessor">
+
+    </bean>
+    <!--
+        5. 启用 IOC 容器中 使用 Shiro 的注解，但必须在配置了 LifecycleBeanPostProcessor 后在可以使用
+    -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"
+          id="authorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <!--
+        6. ShiroFilter(关键)
+            6.1 ID 必须和 web.xml 文件中的 Filter name一值
+    -->
+    <bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroFilter">
+        <property name="securityManager" ref="securityManager"/>
+        <!--登录页面-->
+        <property name="loginUrl" value="/login"/>
+        <!--登录成功页面-->
+        <property name="successUrl" value="/success.jsp"/>
+        <!--没有权限页面-->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <!--
+        路径配置过滤器链：
+            1. anon：可以匿名访问
+            2. authc：认证后才可以访问
+
+        参数：路径 = 拦截器[参数]
+        Shiro采用的是第一次匹配优先
+        -->
+        <property name="filterChainDefinitions">
+            <value>
+                /department=anon
+                /login=authc
+                /verify=anon
+                /user=anon
+                /** = authc
+            </value>
+        </property>
+    </bean>
+</beans>
