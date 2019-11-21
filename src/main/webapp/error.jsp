@@ -1,97 +1,35 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!doctype html>
+<html class="x-admin-sm">
 <head>
-<title>这个.. 页面没有找到！！！</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-body {
-	margin: 0;
-	padding: 0;
-	background: #efefef;
-	font-family: Georgia, Times, Verdana, Geneva, Arial, Helvetica,
-		sans-serif;
-}
+	<meta charset="UTF-8">
+	<title>404 你的页面出现了错误</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-div#mother {
-	margin: 0 auto;
-	width: 943px;
-	height: 572px;
-	position: relative;
-}
-
-div#errorBox {
-	background: url(404_bg.png) no-repeat top left;
-	width: 943px;
-	height: 572px;
-	margin: auto;
-}
-
-div#errorText {
-	color: #39351e;
-	padding: 146px 0 0 446px
-}
-
-div#errorText p {
-	width: 303px;
-	font-size: 14px;
-	line-height: 26px;
-}
-
-div.link { 
-	height: 50px;
-	width: 145px;
-	float: left;
-}
-
-div#home {
-	margin: 20px 0 0 444px;
-}
-
-div#contact {
-	margin: 20px 0 0 25px;
-}
-
-h1 {
-	font-size: 40px;
-	margin-bottom: 35px;
-}
-</style>
-<script type="text/javascript">
-	var i = 9;
-	function bload() {
-		setInterval("index()", 1000);
-	}
-
-	function index() {
-		document.getElementById("indexdiv").innerHTML = i;
-		if (i <= 1) {
-			window.location = "${path}/";
-		}
-		i--;
-
-	}
-</script>
-
-
+	<link rel="stylesheet" href="<c:url value="/static/css/font.css"/>"/>
+	<link rel="stylesheet" href="<c:url value="/static/css/xadmin.css"/>"/>
 </head>
-<body onload="bload();">
-	<div id="mother">
-		<div id="errorBox">
-			<div id="errorText">
-				<h1>Sorry..页面没有找到！</h1>
-				<p>似乎你所寻找的网页已移动或丢失了。
-				<p>或者也许你只是键入错误了一些东西。</p>
-				<p>请不要担心，这没事。如果该资源对你很重要，请与管理员联系。</p>
-				<p>火星不太安全，我可以免费送你回地球</p>
-				<p>
-					你将在&nbsp;<span id="indexdiv" style="color:red;font-size:25px;">10</span>&nbsp;秒后回到地球
-				</p>
-			</div>
-			<div class="link" id="home">
-				<a href="${path}/" title="返回首页">马上回地球</a>
-			</div>
+<body>
+<div class="layui-container">
+	<div class="fly-panel">
+		<div class="fly-none">
+			<h2><i class="layui-icon layui-icon-404"></i></h2>
+			<p>页面或者数据被<a href=""> 纸飞机 </a>运到火星了，啥都看不到了…</p>
 		</div>
 	</div>
+</div>
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
 </body>
 </html>

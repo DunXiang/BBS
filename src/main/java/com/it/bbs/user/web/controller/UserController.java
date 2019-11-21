@@ -4,6 +4,10 @@ import com.it.bbs.user.domain.Message;
 import com.it.bbs.user.domain.User;
 import com.it.bbs.user.exception.UserException;
 import com.it.bbs.user.service.UserService;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -30,8 +34,21 @@ public class UserController {
      * @return 失败返回到失败页面
      * */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ModelAndView login(User user, ModelMap model){
-        System.out.println(model);
+    public ModelAndView login(ModelMap model) throws Exception {
+        // 获取异常的信息
+        String exceptionClassName = (String) model.get("shiroLoginFailure");
+        if (exceptionClassName != null) {
+            if (DisabledAccountException.class.getName().equals(exceptionClassName)) {
+                //最终会抛给异常处理器
+                throw new UserException("你的账户存在异常");
+            }
+            else if (LockedAccountException.class.getName().equals(exceptionClassName)) {
+                throw new UserException("你的邮箱还没有验证请查看邮箱进行验证");
+            }
+            else if (UnknownAccountException.class.getName().equals(exceptionClassName)){
+                throw new UserException("账户不存在");//最终在异常处理器生成未知错误
+            }
+        }
         return null;
     }
 

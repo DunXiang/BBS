@@ -15,6 +15,8 @@
     <mvc:resources mapping="/static/image/*" location="/static/image/"></mvc:resources>
     <!--开启 Spring MVC 更高级的功能-->
     <mvc:annotation-driven/>
+    <!--静态资源都是用默认的servlet-->
+    <mvc:default-servlet-handler/>
     <context:annotation-config></context:annotation-config>
     <!--注解扫描-->
     <context:component-scan base-package="com.it.bbs.user.web.controller" ></context:component-scan>
@@ -25,4 +27,15 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!--异常解析器-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!--默认的异常显示页面-->
+        <property name="defaultErrorView" value="forward:/error.jsp"/>
+        <!--异常映射-->
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.it.bbs.user.exception.UserException">login</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

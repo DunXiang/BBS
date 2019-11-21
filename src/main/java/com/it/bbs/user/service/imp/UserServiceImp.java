@@ -1,9 +1,12 @@
 package com.it.bbs.user.service.imp;
 
+import com.it.bbs.user.domain.MailConfig;
 import com.it.bbs.user.domain.User;
 import com.it.bbs.user.exception.UserException;
 import com.it.bbs.user.mapper.UserMapper;
 import com.it.bbs.user.service.UserService;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,6 +16,8 @@ import java.util.UUID;
 public class UserServiceImp implements UserService {
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private MailSender mailSender;
     /**
      * 登录业务方法
      * @return 如果没有用户就爆出异常
@@ -49,6 +54,22 @@ public class UserServiceImp implements UserService {
         String uuid = UUID.randomUUID().toString();
         user.setId(uuid);
         // 插入
-        return userMapper.insertUser(user);
+        int status = userMapper.insertUser(user);
+        // 发送邮件
+        sendEmail(user);
+        return status;
+    }
+
+    /**
+     * 发送邮件
+     * */
+    public void sendEmail(User user){
+        // 消息构建器
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(MailConfig.getEmailConfig().getProperty("email.username"));
+        message.setTo(user.getEmail());
+        message.setSubject("科信论坛");
+        message.setText("注册");
+        mailSender.send(message);
     }
 }

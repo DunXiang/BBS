@@ -14,11 +14,14 @@ public class User {
     // 用户密码
     private String password;
     // 账户状态
-    private int status;
+    private int status = Status.LOCK;
 
     public class Status{
+        // 正常
         public static final int NORMAL = 1;
+        // 锁定
         public static final int LOCK = 0;
+        // 封印
         public static final int SEAL = -1;
     }
     // 用户部门
