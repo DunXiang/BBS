@@ -74,13 +74,9 @@ public class UserController {
      *  注册一个用户
      * */
     @RequestMapping(value = "/user",method = RequestMethod.POST)
-    public String register(User user){
-        try {
-            userService.insertUser(user);
-            return "redirect:/";
-        } catch (UserException e) {
-            return "redirect:/";
-        }
+    public String register(User user) throws UserException {
+        userService.insertUser(user);
+        return "redirect:/";
     }
 
 

@@ -35,6 +35,7 @@
         <property name="exceptionMappings">
             <props>
                 <prop key="com.it.bbs.user.exception.UserException">login</prop>
+                <prop key="com.it.bbs.user.exception.RedirectException">sinUp</prop>
             </props>
         </property>
     </bean>

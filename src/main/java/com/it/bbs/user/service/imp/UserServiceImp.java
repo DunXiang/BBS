@@ -2,6 +2,7 @@ package com.it.bbs.user.service.imp;
 
 import com.it.bbs.user.domain.MailConfig;
 import com.it.bbs.user.domain.User;
+import com.it.bbs.user.exception.RedirectException;
 import com.it.bbs.user.exception.UserException;
 import com.it.bbs.user.mapper.UserMapper;
 import com.it.bbs.user.service.UserService;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.UUID;
-
+/**
+ *
+ * */
 @Service
 public class UserServiceImp implements UserService {
     @Resource
@@ -49,7 +52,7 @@ public class UserServiceImp implements UserService {
         // 查询要插入的记录是否存在
         User findUser = userMapper.findUser(user);
         // 判断
-        if (findUser != null) throw new UserException("用户重复");
+        if (findUser != null) throw new RedirectException("用户重复");
         // 随机生成一个ID
         String uuid = UUID.randomUUID().toString();
         user.setId(uuid);
@@ -62,6 +65,7 @@ public class UserServiceImp implements UserService {
 
     /**
      * 发送邮件
+     * @param user 保存用户 email 信息的实体类
      * */
     public void sendEmail(User user){
         // 消息构建器

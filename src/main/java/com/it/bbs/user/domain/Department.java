@@ -18,7 +18,7 @@ public class Department {
         this.name = name;
     }
 
-    //- - - - GET AND SET
+    //- - - - GET AND SET - - - - -
 
 
     public String getId() {
