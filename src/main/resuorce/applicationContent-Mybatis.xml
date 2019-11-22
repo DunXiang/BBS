@@ -15,13 +15,19 @@
     <!--引入资源文件-->
     <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
     <!--数据库连接池-->
-    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+<!--    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
         <property name="driverClass" value="${jdbc.driver}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="password" value="${jdbc.password}"/>
         <property name="user" value="${jdbc.user}"/>
         <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
         <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+    </bean>-->
+    <bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
     <!--SessionFactory-->
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
@@ -34,7 +40,8 @@
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
         <property name="basePackage" value="com.it.bbs.user.mapper"/>
     </bean>
-    
+
+
     <bean class="org.mybatis.spring.SqlSessionTemplate" id="sessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sessionFactory"/>
         <constructor-arg name="executorType" value="BATCH"/>
@@ -57,7 +64,7 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="txPointcut" expression="execution(* com.it.bbs.user.service.*.*(..))"/>
+        <aop:pointcut id="txPointcut" expression="execution(* com.it.bbs.*.service.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
 </beans>

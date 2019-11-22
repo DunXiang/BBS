@@ -7,13 +7,14 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 
 
 
 public class UserRealm extends AuthorizingRealm {
-    @Resource
+    @Autowired
     private UserService userService = null;
     public String getName(){return "UserRealm";}
 
@@ -27,11 +28,14 @@ public class UserRealm extends AuthorizingRealm {
      * */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        UsernamePasswordToken passwordToken = (UsernamePasswordToken) token;
+        System.out.println(passwordToken.getUsername()+":"+passwordToken.getPassword());
         // 得到名称
         String name = token.getPrincipal().toString();
         // 查找用户
         try {
-            User user = userService.login(new User(null,name,token.getCredentials().toString(),0,0,null,null));
+            User user = userService.login(new User(passwordToken.getUsername(),null));
+            System.out.println(user);
             // 如果用户没有验证和异常
             if (user.getStatus() == User.Status.LOCK){
                 throw new LockedAccountException();

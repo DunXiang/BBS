@@ -19,13 +19,12 @@ import java.util.UUID;
 public class UserServiceImp implements UserService {
     @Resource
     private UserMapper userMapper;
-    @Resource
-    private MailSender mailSender;
     /**
      * 登录业务方法
      * @return 如果没有用户就爆出异常
      * */
     public User login(User user) throws UserException {
+        System.out.println("UserService");
         User findUser = userMapper.findUser(user);
         if(findUser == null){
             throw new UserException("用户名不存在或密码错误");
@@ -39,6 +38,7 @@ public class UserServiceImp implements UserService {
      * @return 查询到的用户
      * */
     public User findUser(User user){
+        System.out.println("UserServiceImp");
         User findUser = userMapper.findUser(user);
         return findUser;
     }
@@ -74,6 +74,6 @@ public class UserServiceImp implements UserService {
         message.setTo(user.getEmail());
         message.setSubject("科信论坛");
         message.setText("注册");
-        mailSender.send(message);
+        MailConfig.mailSender().send(message);
     }
 }

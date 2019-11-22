@@ -10,4 +10,6 @@ public interface UserService {
     User findUser(User user);
 
     int insertUser(User user) throws UserException;
+
+    void sendEmail(User user);
 }

@@ -17,6 +17,7 @@
     <mvc:annotation-driven/>
     <!--静态资源都是用默认的servlet-->
     <mvc:default-servlet-handler/>
+
     <context:annotation-config></context:annotation-config>
     <!--注解扫描-->
     <context:component-scan base-package="com.it.bbs.user.web.controller" ></context:component-scan>
@@ -27,16 +28,16 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--异常解析器-->
+    <!--&lt;!&ndash;异常解析器&ndash;&gt;
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!--默认的异常显示页面-->
+        &lt;!&ndash;默认的异常显示页面&ndash;&gt;
         <property name="defaultErrorView" value="forward:/error.jsp"/>
-        <!--异常映射-->
+        &lt;!&ndash;异常映射&ndash;&gt;
         <property name="exceptionMappings">
             <props>
                 <prop key="com.it.bbs.user.exception.UserException">login</prop>
                 <prop key="com.it.bbs.user.exception.RedirectException">sinUp</prop>
             </props>
         </property>
-    </bean>
+    </bean>-->
 </beans>

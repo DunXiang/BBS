@@ -28,7 +28,7 @@ public class MailConfig {
         }
     }
 
-    @Bean
+
     public static MailSender mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(emailConfig.getProperty("email.host"));//指定用来发送Email的邮件服务器主机名

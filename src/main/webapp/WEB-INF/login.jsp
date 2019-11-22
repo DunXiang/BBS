@@ -27,11 +27,11 @@
             <div class="modal-body" id = "model-body">
                 <div class="form-group">
 
-                    <input type="text" class="form-control"placeholder="用户名" autocomplete="off">
+                    <input name="username" type="text" class="form-control"placeholder="用户名" autocomplete="off">
                 </div>
                 <div class="form-group">
 
-                    <input type="password" class="form-control" placeholder="密码" autocomplete="off">
+                    <input name="password" type="password" class="form-control" placeholder="密码" autocomplete="off">
                 </div>
             </div>
             <div class="modal-footer">

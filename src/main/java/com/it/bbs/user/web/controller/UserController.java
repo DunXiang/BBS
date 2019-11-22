@@ -30,7 +30,6 @@ public class UserController {
 
     /**
      * 登录路径
-     * @return 成功返回到主页
      * @return 失败返回到失败页面
      * */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
@@ -57,7 +56,7 @@ public class UserController {
      * AJAX 校验用户名和邮箱是否重复
      * @return Message 关于校验的结果
      * */
-    @RequestMapping(value = "/verify",method = RequestMethod.POST)
+    @RequestMapping(value = "/verify")
     @ResponseBody
     public Message verifyValue(User user){
         Message message = null;

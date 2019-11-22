@@ -1,6 +1,7 @@
 package com.it.bbs.user.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * 用户类
@@ -29,25 +30,40 @@ public class User {
     //部门
     private Department departmentBean = null;
     // 创建的时间
-    private Date date;
+    private Date createTime;
     // 邮箱
     private String email;
+    // 性别
+    private String sex;
+    // 用户的等级
+    private Integer grade;
+    // 用户的积分
+    private Integer point;
+    // 用户的角色
+    private Set<Role> roles = null;
 
     public User() {
     }
 
-    public User(String id, String username, String password, int start, int department, Date date, String email) {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String id, String username, String password, int status, int department, Department departmentBean, Date createTime, String email, String sex, Integer grade, Integer point, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.status = start;
+        this.status = status;
         this.department = department;
-        this.date = date;
+        this.departmentBean = departmentBean;
+        this.createTime = createTime;
         this.email = email;
+        this.sex = sex;
+        this.grade = grade;
+        this.point = point;
+        this.roles = roles;
     }
-
-    //- - - - - - GET AND SET - - - - - -
-
 
     public String getId() {
         return id;
@@ -77,8 +93,8 @@ public class User {
         return status;
     }
 
-    public void setStatus(int start) {
-        this.status = start;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getDepartment() {
@@ -97,12 +113,12 @@ public class User {
         this.departmentBean = departmentBean;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getEmail() {
@@ -113,17 +129,35 @@ public class User {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", start=" + status +
-                ", department=" + department +
-                ", departmentBean=" + departmentBean +
-                ", date=" + date +
-                ", email='" + email + '\'' +
-                '}';
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
